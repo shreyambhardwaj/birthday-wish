@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Didi ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <!-- BALLOONS -->
+    <div class="balloons">
+        <span>🎈</span>
+        <span>🎈</span>
+        <span>🎈</span>
+        <span>🎈</span>
+        <span>🎈</span>
+    </div>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-text">
+                ✨ A Special Day For A Special Person ✨
+            </p>
+
+            <h1>
+                Happy Birthday
+                <span>Didi ❤️</span>
+            </h1>
+
+            <p class="subtitle">
+                Today is your special day.
+                <br>
+                I have a little surprise for you... 🎁
+            </p>
+
+            <!-- IMPORTANT -->
+            <button
+                id="surpriseButton"
+                type="button"
+                onclick="openSurprise()">
+
+                🎁 Open Your Surprise
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SURPRISE -->
+    <section
+        id="surpriseSection"
+        class="surprise-section">
+
+        <div class="birthday-card">
+
+            <div class="photo-box">
+
+                <div class="photo-border">
+
+                    <img
+                        src="/images/WhatsApp Image 2026-10-04 at 1.56.49 PM.jpeg"
+                        alt="Didi">
+
+                </div>
+
+            </div>
+
+
+            <div class="cake">
+                🎂
+            </div>
+
+
+            <h2>
+                Happy Birthday,
+                <span>Didi! ❤️</span>
+            </h2>
+
+
+            <p class="message">
+
+                Today is a very special day because
+                it is your birthday. ❤️
+
+                <br><br>
+
+                You are not just my cousin sister,
+                you are a very special part of our family.
+
+                <br><br>
+
+                I wish you a life full of happiness,
+                success, love and beautiful memories.
+
+                <br><br>
+
+                May all your dreams come true.
+
+                <br><br>
+
+                Keep smiling.
+                Keep shining.
+                And always stay amazing. ✨
+
+                <br><br>
+
+                <strong>
+                    HAPPY BIRTHDAY DIDI! 🎂🎉❤️
+                </strong>
+
+            </p>
+
+
+            <div class="signature">
+
+                With lots of love ❤️
+
+                <br>
+
+                <strong>
+                    Your Brother Shreyam ( Ansh )
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+    <section class="final-section">
+
+        <div class="final-content">
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+            <h2>
+                Stay Happy.
+                <span>Stay Amazing.</span>
+            </h2>
+
+            <p>
+                You deserve all the happiness in the world. 🌸
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- EFFECTS -->
+    <div id="effects"></div>
+
+
+    <!-- =================================================
+         WORKING JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+        function openSurprise() {
+
+            const section =
+                document.getElementById("surpriseSection");
+
+            /* SHOW CARD */
+
+            section.style.opacity = "1";
+            section.style.visibility = "visible";
+            section.style.transform = "translateY(0)";
+
+            /* MUSIC */
+
+            playBirthdayMusic();
+
+            /* EFFECTS */
+
+            createConfetti();
+
+            createHearts();
+
+            /* SCROLL */
+
+            setTimeout(function () {
+
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }, 300);
+
+        }
+
+
+        /* =========================================
+           BIRTHDAY MUSIC
+        ========================================= */
+
+        function playBirthdayMusic() {
+
+            const AudioContext =
+                window.AudioContext ||
+                window.webkitAudioContext;
+
+            if (!AudioContext) {
+                return;
+            }
+
+            const audio =
+                new AudioContext();
+
+            const notes = [
+                261.63,
+                261.63,
+                293.66,
+                261.63,
+                349.23,
+                329.63,
+
+                261.63,
+                261.63,
+                293.66,
+                261.63,
+                392.00,
+                349.23,
+
+                261.63,
+                261.63,
+                523.25,
+                440.00,
+                349.23,
+                329.63,
+                293.66,
+
+                466.16,
+                466.16,
+                440.00,
+                349.23,
+                392.00,
+                349.23
+            ];
+
+            let time =
+                audio.currentTime;
+
+            notes.forEach(function (frequency) {
+
+                const oscillator =
+                    audio.createOscillator();
+
+                const gain =
+                    audio.createGain();
+
+                oscillator.frequency.value =
+                    frequency;
+
+                oscillator.type =
+                    "sine";
+
+                gain.gain.setValueAtTime(
+                    0.001,
+                    time
+                );
+
+                gain.gain.linearRampToValueAtTime(
+                    0.15,
+                    time + 0.03
+                );
+
+                gain.gain.linearRampToValueAtTime(
+                    0.001,
+                    time + 0.4
+                );
+
+                oscillator.connect(gain);
+
+                gain.connect(
+                    audio.destination
+                );
+
+                oscillator.start(time);
+
+                oscillator.stop(
+                    time + 0.45
+                );
+
+                time += 0.48;
+
+            });
+
+        }
+
+
+        /* =========================================
+           CONFETTI
+        ========================================= */
+
+        function createConfetti() {
+
+            const effects =
+                document.getElementById("effects");
+
+            const items = [
+                "🎉",
+                "🎊",
+                "✨",
+                "💖",
+                "⭐",
+                "💕",
+                "🎂"
+            ];
+
+            for (
+                let i = 0;
+                i < 60;
+                i++
+            ) {
+
+                const item =
+                    document.createElement("span");
+
+                item.className =
+                    "effect-item";
+
+                item.innerHTML =
+                    items[
+                        Math.floor(
+                            Math.random() *
+                            items.length
+                        )
+                    ];
+
+                item.style.left =
+                    Math.random() * 100 + "%";
+
+                item.style.animationDelay =
+                    Math.random() * 2 + "s";
+
+                item.style.fontSize =
+                    15 +
+                    Math.random() * 20 +
+                    "px";
+
+                effects.appendChild(item);
+
+                setTimeout(function () {
+
+                    item.remove();
+
+                }, 6000);
+
+            }
+
+        }
+
+
+        /* =========================================
+           HEARTS
+        ========================================= */
+
+        function createHearts() {
+
+            const effects =
+                document.getElementById("effects");
+
+            for (
+                let i = 0;
+                i < 25;
+                i++
+            ) {
+
+                const heart =
+                    document.createElement("span");
+
+                heart.className =
+                    "heart-item";
+
+                heart.innerHTML =
+                    Math.random() > 0.5
+                        ? "❤️"
+                        : "💖";
+
+                heart.style.left =
+                    Math.random() * 100 + "%";
+
+                heart.style.animationDelay =
+                    Math.random() * 2 + "s";
+
+                effects.appendChild(
+                    heart
+                );
+
+                setTimeout(function () {
+
+                    heart.remove();
+
+                }, 7000);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
